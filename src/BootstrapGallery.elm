@@ -11,22 +11,6 @@ module BootstrapGallery exposing
     )
 
 {-| This module is used to render images as gallery thumbnails & lightboxes.
-
-TODO:
-
-  - Store list in model? Currently don't have it so thumbnails & next/prev
-    could have different sets of images.
-  - Hide next/prev buttons on single item list.
-  - Dim current & show spinner while waiting for next/prev image to load
-      - Do we stack the current and next image on top of each other, with a
-        spinner in between?
-  - Esc & arrow keys to close/navigate
-      - It seems like this'd require subscriptions to ports that bind the onkeyup
-        events to the document. Which means some documentation & example code for
-        eventual package.
-  - Show row of thumbnails below image or bottom of screen.
-  - Pull out of app & turn into package.
-
 -}
 
 import Animation
