@@ -24,8 +24,12 @@ Contributions, feature requests, & bug reports are always welcome!
 There is an `.nvmrc` & `package.json` in this directory, so you can run `nvm
 use && npm i` to get all the development tools installed.
 
-Run `npx edp` to launch a server for previewing the documentation and `npx
-elm-analyse -s` to launch a server for linting the code.
+Run `npm run serve` to build, watch, & serve the example application at
+http://localhost:8000.
+
+Run `npm run docs` to launch a server at http://localhost:8002 for previewing
+the documentation and `npx elm-analyse -s` to launch a server at
+http://localhost:8001 for linting the code.
 
 
 ## TODO
