@@ -1,16 +1,32 @@
 module BootstrapGallery exposing
     ( Config
-    , Model
-    , Msg
-    , initial
-    , modal
-    , open
-    , subscriptions
-    , thumbnails
-    , update
+    , Model, initial
+    , modal, thumbnails
+    , Msg, update, subscriptions, open
     )
 
 {-| This module is used to render images as gallery thumbnails & lightboxes.
+
+
+# Configuration
+
+@docs Config
+
+
+# Data
+
+@docs Model, initial
+
+
+# Rendering
+
+@docs modal, thumbnails
+
+
+# Updating
+
+@docs Msg, update, subscriptions, open
+
 -}
 
 import Animation
@@ -65,6 +81,8 @@ initial =
     }
 
 
+{-| Messages the modal may raise.
+-}
 type Msg a
     = Noop
     | Close
@@ -189,7 +207,8 @@ updateBackgroundImage cfg selector m =
 -}
 subscriptions : Model a -> Sub (Msg a)
 subscriptions m =
-    Animation.subscription Animate [ m.style, m.backgroundImageStyle, m.foregroundImageStyle ]
+    Animation.subscription Animate
+        [ m.style, m.backgroundImageStyle, m.foregroundImageStyle ]
 
 
 {-| Build a Model with the correct Next & Previous fields for the selected item.

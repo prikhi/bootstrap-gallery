@@ -16,6 +16,18 @@ It was originally developed for the [Foundation for Intentional Community's
 Wordpress Theme][fic-theme] and was extracted from that repository.
 
 
+## Contribute
+
+Contributions, feature requests, & bug reports are always welcome!
+
+
+There is an `.nvmrc` & `package.json` in this directory, so you can run `nvm
+use && npm i` to get all the development tools installed.
+
+Run `npx edp` to launch a server for previewing the documentation and `npx
+elm-analyse -s` to launch a server for linting the code.
+
+
 ## TODO
 
 These are things that weren't necessary for the FIC gallery modal, but would be
@@ -34,6 +46,7 @@ nice for other library consumers:
     * Or maybe we could focus part of the modal when it opens so we can catch
       events on there?
 * Allow showing row of thumbnails below image or bottom of screen.
+* Example app containing single image lightbox & gallery of images.
 
 ## License
 
