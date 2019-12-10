@@ -1,5 +1,8 @@
 # Elm Bootstrap Gallery
 
+[![Elm Bootstrap Build Status](https://travis-ci.org/prikhi/bootstrap-gallery.svg?branch=master)](https://travis-ci.org/prikhi/bootstrap-gallery)
+
+
 This package allows you to pop-open a model gallery for flipping through images
 or displaying a single image in a lightbox.
 
