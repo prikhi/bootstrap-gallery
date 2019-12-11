@@ -278,8 +278,8 @@ modal model =
                         [ class "modal align-items-center justify-content-center"
                         , tabindex -1
                         ]
-                        [ div [ class "modal-dialog" ]
-                            [ div [ class "modal-content" ]
+                        [ div [ class "modal-dialog position-absolute mt-0 mb-0" ]
+                            [ div [ class "modal-content h-100 border-0 bg-transparent" ]
                                 [ div [ class "modal-body" ]
                                     []
                                 ]
@@ -290,7 +290,7 @@ modal model =
 
                 Just _ ->
                     ( div
-                        [ class "modal d-flex align-items-center justify-content-center"
+                        [ class "modal w-100 h-100 d-flex align-items-center justify-content-center"
                         , tabindex -1
                         , closeModalOnClick
                         , closeModalOnEsc
@@ -298,17 +298,17 @@ modal model =
                         , ignoreMove
                         ]
                         [ div
-                            (class "modal-dialog modal-dialog-background"
+                            (class "modal-dialog position-absolute mt-0 mb-0 modal-dialog-background"
                                 :: Animation.render model.backgroundImageStyle
                             )
                             []
                         , div
-                            (class "modal-dialog modal-dialog-foreground"
+                            (class "modal-dialog position-absolute mt-0 mb-0 modal-dialog-foreground"
                                 :: Animation.render model.foregroundImageStyle
                             )
                             []
-                        , div [ class "modal-dialog" ]
-                            [ div [ class "modal-content" ]
+                        , div [ class "modal-dialog position-absolute mt-0 mb-0" ]
+                            [ div [ class "modal-content h-100 border-0 bg-transparent" ]
                                 [ div [ ignoreClick, class "modal-body" ]
                                     [ Html.span [ class "modal-prev", previousOnClick ]
                                         [ Html.span [ class "fa-stack fa-2x" ]
@@ -330,7 +330,7 @@ modal model =
                                 ]
                             ]
                         ]
-                    , div [ class "modal-backdrop d-flex", closeModalOnClick ] []
+                    , div [ class "modal-backdrop w-100 h-100 d-flex", closeModalOnClick ] []
                     )
     in
     Keyed.node "div"
@@ -344,7 +344,7 @@ thumbnails : Config a -> List a -> Html (Msg a)
 thumbnails c =
     let
         renderItem item =
-            div [ class "col-24 col-md-12 col-lg-6 mb-2 text-center" ]
+            div [ class "col-6 col-md-4 col-lg-3 mb-2 text-center" ]
                 [ a
                     [ href <| c.imageUrl item
                     , openModalOnClick item
@@ -357,7 +357,7 @@ thumbnails c =
                     ]
                 ]
     in
-    div [ class "row" ] << List.map renderItem
+    div [ class "row justify-content-around align-items-center" ] << List.map renderItem
 
 
 {-| Open the modal, selecting the given item.

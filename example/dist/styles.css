@@ -16,16 +16,10 @@ img {
 }
 
 .modal-dialog {
-  /* Fix overlay of the control & background image dialogs */
-  position: absolute;
   /* Ignore Bootstrap's modal width & margin */
   max-width: inherit;
   width: 95%;
   height: 95%;
-}
-.modal-dialog .modal-content {
-  /* Hide the white modal background & border */
-  background: transparent;
 }
 
 /* Position the Close button */
@@ -39,7 +33,6 @@ img {
 /* Make the previous/next hover areas take up almost half the modal width */
 .modal-prev, .modal-next {
   width: 40%;
-  position: absolute;
   top: 0;
   cursor: pointer;
 }
