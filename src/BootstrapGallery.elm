@@ -30,7 +30,7 @@ module BootstrapGallery exposing
 -}
 
 import Animation
-import Html exposing (Html, a, div, img)
+import Html exposing (Html, a, div, img, text)
 import Html.Attributes exposing (class, href, src, tabindex)
 import Html.Events exposing (custom, keyCode, preventDefaultOn, stopPropagationOn)
 import Html.Keyed as Keyed
@@ -265,12 +265,42 @@ calcNextPrev allItems selected =
            )
 
 
-{-| Render the Modal. This should always be done, even if the Modal has not
-been opened.
+{-| Render the Modal.
+
+To get nice open/close transitions, you should always render the modal, even if
+the Modal has not been opened.
+
+Preferably place this at the end of your HTML to prevent other elements from
+obscuring the modal while it transitions to the open state.
+
 -}
 modal : Model a -> Html (Msg a)
 modal model =
     let
+        previousElement { previous, selected } =
+            if previous /= selected then
+                Html.span [ class "modal-prev position-absolute d-flex align-items-center justify-content-center h-100", previousOnClick ]
+                    [ Html.span [ class "fa-stack fa-2x" ]
+                        [ Html.i [ class "fa fa-circle fa-stack-2x" ] []
+                        , Html.i [ class "fa fa-chevron-left fa-stack-1x fa-inverse" ] []
+                        ]
+                    ]
+
+            else
+                text ""
+
+        nextElement { next, selected } =
+            if next /= selected then
+                Html.span [ class "modal-next position-absolute d-flex align-items-center justify-content-center h-100", nextOnClick ]
+                    [ Html.span [ class "fa-stack fa-2x" ]
+                        [ Html.i [ class "fa fa-circle fa-stack-2x" ] []
+                        , Html.i [ class "fa fa-chevron-right fa-stack-1x fa-inverse" ] []
+                        ]
+                    ]
+
+            else
+                text ""
+
         ( modal_, backdrop ) =
             case model.data of
                 Nothing ->
@@ -288,7 +318,7 @@ modal model =
                     , div [ class "modal-backdrop" ] []
                     )
 
-                Just _ ->
+                Just data ->
                     ( div
                         [ class "modal w-100 h-100 d-flex align-items-center justify-content-center"
                         , tabindex -1
@@ -310,18 +340,8 @@ modal model =
                         , div [ class "modal-dialog position-absolute mt-0 mb-0" ]
                             [ div [ class "modal-content h-100 border-0 bg-transparent" ]
                                 [ div [ ignoreClick, class "modal-body" ]
-                                    [ Html.span [ class "modal-prev", previousOnClick ]
-                                        [ Html.span [ class "fa-stack fa-2x" ]
-                                            [ Html.i [ class "fa fa-circle fa-stack-2x" ] []
-                                            , Html.i [ class "fa fa-chevron-left fa-stack-1x fa-inverse" ] []
-                                            ]
-                                        ]
-                                    , Html.span [ class "modal-next", nextOnClick ]
-                                        [ Html.span [ class "fa-stack fa-2x" ]
-                                            [ Html.i [ class "fa fa-circle fa-stack-2x" ] []
-                                            , Html.i [ class "fa fa-chevron-right fa-stack-1x fa-inverse" ] []
-                                            ]
-                                        ]
+                                    [ previousElement data
+                                    , nextElement data
                                     , Html.span [ class "fa-stack fa-2x modal-close", closeModalOnClick ]
                                         [ Html.i [ class "fa fa-circle fa-stack-2x" ] []
                                         , Html.i [ class "fa fa-times fa-stack-1x fa-inverse" ] []
