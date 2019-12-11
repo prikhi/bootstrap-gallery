@@ -1,8 +1,8 @@
 module BootstrapGallery exposing
     ( Config
     , Model, initial
-    , modal, thumbnails
-    , Msg, update, subscriptions, open
+    , modal, thumbnails, openOnClick
+    , Msg, update, subscriptions, open, close, next, previous
     )
 
 {-| This module is used to render images as gallery thumbnails & lightboxes.
@@ -20,12 +20,12 @@ module BootstrapGallery exposing
 
 # Rendering
 
-@docs modal, thumbnails
+@docs modal, thumbnails, openOnClick
 
 
 # Updating
 
-@docs Msg, update, subscriptions, open
+@docs Msg, update, subscriptions, open, close, next, previous
 
 -}
 
@@ -66,7 +66,7 @@ type alias SubModel a =
     }
 
 
-{-| A blank galery with no associated images.
+{-| A blank gallery with no associated images.
 -}
 initial : Model a
 initial =
@@ -236,12 +236,12 @@ calcNextPrev allItems selected =
                 ( _, True, Just _ ) ->
                     acc
 
-                ( prev, False, next ) ->
+                ( prev, False, next_ ) ->
                     if i == selected then
-                        ( prev, True, next )
+                        ( prev, True, next_ )
 
                     else
-                        ( Just i, False, next )
+                        ( Just i, False, next_ )
         )
         ( Nothing, False, Nothing )
         allItems
@@ -256,10 +256,10 @@ calcNextPrev allItems selected =
                         (List.head allItems)
                     )
                     |> Maybe.map
-                        (\( previous, next ) ->
+                        (\( previous_, next_ ) ->
                             { selected = selected
-                            , next = next
-                            , previous = previous
+                            , next = next_
+                            , previous = previous_
                             }
                         )
            )
@@ -277,8 +277,8 @@ obscuring the modal while it transitions to the open state.
 modal : Model a -> Html (Msg a)
 modal model =
     let
-        previousElement { previous, selected } =
-            if previous /= selected then
+        previousElement data =
+            if data.previous /= data.selected then
                 Html.span [ class "modal-prev position-absolute d-flex align-items-center justify-content-center h-100", previousOnClick ]
                     [ Html.span [ class "fa-stack fa-2x" ]
                         [ Html.i [ class "fa fa-circle fa-stack-2x" ] []
@@ -289,8 +289,8 @@ modal model =
             else
                 text ""
 
-        nextElement { next, selected } =
-            if next /= selected then
+        nextElement data =
+            if data.next /= data.selected then
                 Html.span [ class "modal-next position-absolute d-flex align-items-center justify-content-center h-100", nextOnClick ]
                     [ Html.span [ class "fa-stack fa-2x" ]
                         [ Html.i [ class "fa fa-circle fa-stack-2x" ] []
@@ -358,7 +358,7 @@ modal model =
         [ ( "gallery-modal", modal_ ), ( "gallery-backdrop", backdrop ) ]
 
 
-{-| Render thumbnails using the given list.
+{-| Render thumbnails in a column grid using the given list of images.
 -}
 thumbnails : Config a -> List a -> Html (Msg a)
 thumbnails c =
@@ -380,10 +380,38 @@ thumbnails c =
     div [ class "row justify-content-around align-items-center" ] << List.map renderItem
 
 
-{-| Open the modal, selecting the given item.
+{-| Open the modal & select the given item.
 -}
-open : (Msg a -> msg) -> a -> Html.Attribute msg
-open m =
+open : Config a -> Model a -> List a -> a -> Model a
+open cfg model items item =
+    update cfg (Select item) model items
+
+
+{-| Close the modal.
+-}
+close : Config a -> Model a -> List a -> Model a
+close cfg =
+    update cfg Close
+
+
+{-| Select the next item in the list.
+-}
+next : Config a -> Model a -> List a -> Model a
+next cfg =
+    update cfg Next
+
+
+{-| Select the previous item in the list.
+-}
+previous : Config a -> Model a -> List a -> Model a
+previous cfg =
+    update cfg Previous
+
+
+{-| Open the modal when the element is clicked & select the given item.
+-}
+openOnClick : (Msg a -> msg) -> a -> Html.Attribute msg
+openOnClick m =
     Html.Attributes.map m << openModalOnClick
 
 

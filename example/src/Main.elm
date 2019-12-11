@@ -105,7 +105,7 @@ view model =
         [ h1 [] [ text "Bootstrap Gallery Example" ]
         , div [ class "mt-4" ]
             [ h2 [] [ text "Lightbox" ]
-            , div [ Gallery.open LightboxMsg lightboxImage ]
+            , div [ Gallery.openOnClick LightboxMsg lightboxImage ]
                 [ img [ src lightboxImage, class "img-fluid" ] []
                 ]
             ]
