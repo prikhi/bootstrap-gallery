@@ -6,7 +6,7 @@
     "scripts": {
         "docs": "elm-doc-preview -p 8002",
         "lint": "elm-analyse -s -p 8001",
-        "serve": "cd example; elm-live src/Main.elm -u -d dist/ -s dist/index.html -- --debug --output=dist/elm.js",
+        "serve": "cd example; elm-live src/Main.elm -u -H -d dist/ -s dist/index.html -- --debug --output=dist/elm.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
