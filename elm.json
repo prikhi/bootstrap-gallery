@@ -3,7 +3,7 @@
     "name": "prikhi/bootstrap-gallery",
     "summary": "A Modal Gallery for Bootstrap v4",
     "license": "BSD-3-Clause",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "exposed-modules": [
         "BootstrapGallery"
     ],

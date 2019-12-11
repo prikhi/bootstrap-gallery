@@ -25,7 +25,7 @@ Wordpress Theme][fic-theme] and was extracted from that repository for use in
 
 There is an [example application][example-app] included in the repository.
 
-[![Elm Bootstrap Gallery Example Screenshot](https://raw.githubusercontent.com/prikhi/bootstrap-gallery/master/screenshot.png)](https://raw.githubusercontent.com/KrisKasprzak/ILI9341_t3_controls/master/Equalizer.jpg)
+[![Elm Bootstrap Gallery Example Screenshot](https://raw.githubusercontent.com/prikhi/bootstrap-gallery/master/screenshot.png)](https://raw.githubusercontent.com/prikhi/bootstrap-gallery/master/screenshot.png)
 
 
 ## Usage
