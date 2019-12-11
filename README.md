@@ -124,9 +124,9 @@ use && npm i` to get all the development tools installed.
 Run `npm run serve` to build, watch, & serve the example application at
 http://localhost:8000.
 
-Run `npx elm-analyse -s` to launch a server at http://localhost:8001 for
-linting the code and `npm run docs` to launch a server at http://localhost:8002
-for previewing the documentation.
+Run `npm run lint` to launch a server at http://localhost:8001 for linting the
+code and `npm run docs` to launch a server at http://localhost:8002 for
+previewing the documentation.
 
 
 ## TODO
