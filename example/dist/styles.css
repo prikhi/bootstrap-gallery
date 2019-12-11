@@ -1,0 +1,80 @@
+img {
+  cursor: pointer;
+}
+
+.modal-backdrop {
+  opacity: 0.5;
+}
+
+.modal-dialog-background, .modal-dialog-foreground {
+  /* Show a dark grey background in non-image areas */
+  background-color: #292B2C;
+  /* Center & contain the image in the modal */
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.modal-dialog {
+  /* Fix overlay of the control & background image dialogs */
+  position: absolute;
+  /* Ignore Bootstrap's modal width & margin */
+  max-width: inherit;
+  width: 95%;
+  height: 95%;
+}
+.modal-dialog .modal-content {
+  /* Hide the white modal background & border */
+  background: transparent;
+}
+
+/* Position the Close button */
+.modal-close {
+  cursor: pointer;
+  position: absolute !important;
+  top: 2.5%;
+  right: 2.5%;
+}
+
+/* Make the previous/next hover areas take up almost half the modal width */
+.modal-prev, .modal-next {
+  width: 40%;
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+}
+
+/* Position the hover areas & the icons within them */
+.modal-prev {
+  left: 0;
+}
+.modal-prev .fa-stack {
+  right: 25%;
+}
+.modal-prev::before {
+  background-image: linear-gradient(to right, rgba(0,0,0,0.4), rgba(0,0,0,0));
+}
+.modal-next {
+  right: 0;
+}
+.modal-next .fa-stack {
+  left: 25%;
+}
+.modal-next::before {
+  background-image: linear-gradient(to left, rgba(0,0,0,0.4), rgba(0,0,0,0));
+}
+
+/* Use the ::before elements to show a gradient on hover */
+.modal-prev::before, .modal-next::before {
+  transition: opacity 0.45s;
+  opacity: 0;
+  content: '';
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.modal-prev:hover::before, .modal-next:hover::before {
+  opacity: 1;
+}
