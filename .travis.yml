@@ -1,5 +1,7 @@
 ---
 
+dist: focal
+
 language: elm
 node_js: '13'
 
